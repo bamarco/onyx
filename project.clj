@@ -1,4 +1,4 @@
-(defproject org.onyxplatform/onyx "0.10.0-beta9"
+(defproject org.onyxplatform/onyx "0.10.0-beta8"
   :description "Distributed, masterless, high performance, fault tolerant data processing for Clojure"
   :url "https://github.com/onyx-platform/onyx"
   :license {:name "Eclipse Public License"
@@ -27,20 +27,20 @@
                  [com.taoensso/timbre "4.8.0"]
                  [com.taoensso/nippy "2.13.0"]
                  [io.aeron/aeron-all "1.1.0"]
-                 [io.replikativ/hasch "0.3.3" 
-                  :exclusions [org.clojure/clojurescript com.cognitect/transit-clj 
-                               com.cognitect/transit-cljs org.clojure/data.fressian 
+                 [io.replikativ/hasch "0.3.3"
+                  :exclusions [org.clojure/clojurescript com.cognitect/transit-clj
+                               com.cognitect/transit-cljs org.clojure/data.fressian
                                com.cemerick/austin]]
-                 [prismatic/schema "1.0.5"]
+                 [prismatic/schema "1.1.6"]
                  [com.amazonaws/aws-java-sdk-s3 "1.11.58"]
                  [clj-tuple "0.2.2"]
                  [clj-fuzzy "0.3.1" :exclusions [org.clojure/clojurescript]]]
   :jvm-opts ^:replace ["-server"
                        "-Xmx2400M"
-                       "-XX:+UseG1GC" 
+                       "-XX:+UseG1GC"
                        "-Daeron.client.liveness.timeout=100000000000"
                        "-Daeron.image.liveness.timeout=100000000000"
-                       "-XX:-OmitStackTraceInFastThrow" 
+                       "-XX:-OmitStackTraceInFastThrow"
                        "-XX:+UnlockCommercialFeatures"
                        "-XX:+FlightRecorder"
                        "-XX:StartFlightRecording=duration=1080s,filename=recording.jfr"]
@@ -48,7 +48,7 @@
   :profiles {:dev {:global-vars {*warn-on-reflection* true}
                    :dependencies [[org.clojure/tools.nrepl "0.2.11"]
                                   [org.clojure/java.jmx "0.3.3"]
-                                  [clojure-future-spec "1.9.0-alpha14"]
+                                  [clojure-future-spec "1.9.0-alpha16-1"]
                                   [table "0.5.0"]
                                   [org.clojure/test.check "0.9.0"]
                                   [org.senatehouse/expect-call "0.1.0"]
@@ -71,7 +71,7 @@
              :clojure-1.7 {:dependencies [[org.clojure/clojure "1.7.0"]]}
              :clojure-1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}}
   :test-selectors {:default (fn [t] (if-not (or (:stress t) (:broken t))
-                                      t)) 
+                                      t))
                    :stress :stress
                    :broken :broken
                    :smoke :smoke}

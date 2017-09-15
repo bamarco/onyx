@@ -1,8 +1,8 @@
 (ns onyx.static.util)
 
 (defn index-of [coll element]
-  (ffirst 
-   (filter (fn [[index elem]] (= elem element)) 
+  (ffirst
+   (filter (fn [[index elem]] (= elem element))
            (map list (range) coll))))
 
 #?(:cljs
@@ -24,7 +24,13 @@
              (throw (Exception.))))
        (catch Throwable e
          (throw (ex-info (str "Could not resolve symbol on the classpath, did you require the file that contains the symbol " kw "?") {:kw kw})))))
-  #?(:cljs (resolve-dynamic kw)))
+  #?(:cljs (try
+             (resolve-dynamic kw)
+             (catch js/TypeError e (throw
+                                     (js/TypeError.
+                                       (str (.-message e) ". Did you ^:export? Did you include it's parent file in your ns?\n")
+                                       (.-fileName e)
+                                       (.-lineNumber e)))))))
 
 (defn exception? [e]
   #?(:clj (instance? java.lang.Throwable e))

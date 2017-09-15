@@ -1,10 +1,29 @@
 (ns onyx.spec
-  (:require #?(:clj [clojure.spec :as s]
-               :cljs [cljs.spec :as s :refer-macros [coll-of]])
-            #?(:clj [clojure.future :refer [any? boolean? uuid? pos-int?]])
+  (:require #?(:clj [clojure.spec.alpha :as s]
+               :cljs [cljs.spec.alpha :as s :refer-macros [coll-of]])
             [onyx.information-model :as i]
+            #?(:clj [clojure.future])
             [onyx.refinements :as r]
             [onyx.triggers :as t]))
+
+;; experimental clojure.future fixer
+;; #?(:clj
+;; (when (not (resolve 'any?))
+;;   (def any? clojure.future/any?)))
+
+;; #?(:clj
+;; (when (not (resolve 'boolean?))
+;;   (def boolean? clojure.future/boolean?)))
+
+;; #?(:clj
+;; (when (not (resolve 'uuid?))
+;;   (def uuid? clojure.future/uuid?)))
+
+;; #?(:clj
+;; (when (not (resolve 'pos-int?))
+;;   (def pos-int? clojure.future/pos-int?)))
+
+
 
 ;; This is an experimental Clojure.spec specification for Onyx.
 ;; It should not be treated as the canonical specification. Refer
